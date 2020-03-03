@@ -4,9 +4,7 @@ from bs4 import BeautifulSoup
 import requests
 import numpy as np
 import pandas as pd
-from lxml import etree
 import time
-import schedule
 from bs4 import BeautifulSoup
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -83,8 +81,9 @@ def pvtlinks():
 
 if __name__ == "__main__":
     GenerateResources()
-    get_new_data_every(UPDATE_INTERVAL)
+
     # do all the shit u want to do before app run below
     app.run(debug=True)
+    get_new_data_every(UPDATE_INTERVAL)
 
 
