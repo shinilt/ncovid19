@@ -73,9 +73,14 @@ def home():
     return render_template("home.html")
 
 
-@app.route("/pvtlinks", methods=['GET'])
-def pvtlinks():
-    return render_template("home.html")
+@app.route("/countrylist", methods=['GET'])
+def countrylist():
+    return render_template("CountryList.html")
+
+@app.route("/refresh", methods=['GET'])
+def refresh():
+    GenerateResources()
+    return "Refresh completed"
 
 
 
