@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Content as Array.</h2>
+<p>Content written as an JSON array will be converted into a JavaScript array.</p>
+
+<p id="demo"></p>
+<p id="demo1"></p>
+<script>
+var xmlhttp = new XMLHttpRequest();
+xmlhttp.onreadystatechange = function() {
+  if (this.readyState == 4 && this.status == 0) {
+	document.getElementById("demo1").innerHTML = this.status;
+    var myArr = JSON.parse(this.responseText);
+	document.getElementById("demo1").innerHTML = 'some';
+    document.getElementById("demo").innerHTML = myArr;
+  }
+  else {document.getElementById("demo").innerHTML=this.status;}
+};
+xmlhttp.open("GET", "https://ncovid19.herokuapp.com/getjson");
+xmlhttp.send();
+</script>
+
+
+</body>
+</html>
+
