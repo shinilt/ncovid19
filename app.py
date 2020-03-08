@@ -98,7 +98,7 @@ def countrylist():
 
 @app.route("/getjson", methods=['GET'])
 def getJson():
-    return render_template(json.html)
+    return render_template("json.html")
 
 @app.route("/refresh", methods=['GET'])
 def refresh():
