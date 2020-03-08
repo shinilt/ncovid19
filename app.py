@@ -25,7 +25,7 @@ class myThread (threading.Thread):
 
 
 app = Flask(__name__)
-
+htmltable = ""
 UPDATE_INTERVAL = 1800
 def get_new_data_every(period):
 
@@ -74,6 +74,7 @@ def GenerateResources():
 
     # write the dataframe html to file
     html = df2.to_html()
+    htmltable=html
     text_file = open("templates/CountryList.html", "w")
     text_file.write(html)
     text_file.close()
@@ -88,7 +89,7 @@ def home():
 
 @app.route("/countrylist", methods=['GET'])
 def countrylist():
-    return render_template("CountryList.html")
+    return htmltable
 
 @app.route("/refresh", methods=['GET'])
 def refresh():
