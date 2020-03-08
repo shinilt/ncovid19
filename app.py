@@ -5,18 +5,32 @@ import requests
 import numpy as np
 import pandas as pd
 import time
+import datetime
 from bs4 import BeautifulSoup
+import matplotlib
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
+import threading
 import seaborn as sns
+
+class myThread (threading.Thread):
+    def __init__(self, threadID, name):
+        threading.Thread.__init__(self)
+        self.threadID = threadID
+        self.name = name
+    def run(self):
+        print("within auto refresh thread")
+        get_new_data_every(1800.0)
+
+
 
 app = Flask(__name__)
 
 UPDATE_INTERVAL = 1800
-def get_new_data_every(period=UPDATE_INTERVAL):
+def get_new_data_every(period):
 
     while True:
         GenerateResources()
-        print("data updated")
         time.sleep(period)
 
 def GenerateResources():
@@ -24,14 +38,13 @@ def GenerateResources():
     df = pd.read_html(URL)
     req_data = requests.get(URL)
     review_soup = BeautifulSoup(req_data.content, 'html.parser')
-    df2 = df[0]
-    df2.columns = ['Country Or Location', 'Total Cases', 'New Cases', 'Total Deaths', 'NewDeaths', 'ActiveCases',
-                   'Total Recovered', 'Serious']
-    df2.fillna(0)
-    del df2['NewDeaths']
-    del df2['Serious']
-    # columns to convert to int
-    cols = ['Total Cases', 'New Cases', 'Total Deaths', 'Total Recovered']
+
+    #copy only selected columns
+    df2 = df[0].iloc[:, [0, 1, 2, 3, 5]]
+    #rename the columns
+    df2.columns = ['Country Or Location', 'Total Cases', 'New Cases', 'Total Deaths', 'Total Recovered']
+    # columns to convert to int for visual appearance
+    cols = ['Total Cases', 'Total Deaths', 'Total Recovered']
     df2[cols] = df2[cols].fillna(0).applymap(np.int64)
 
 
@@ -79,16 +92,27 @@ def countrylist():
 
 @app.route("/refresh", methods=['GET'])
 def refresh():
-    GenerateResources()
+    #create new thread
+    refreshthread = myThread(2, "ManualRefreshThread")
+    # Start new Threads
+    refreshthread.setDaemon(True)
+    refreshthread.start()
     return "Refresh completed"
 
 
 
+
 if __name__ == "__main__":
+    #Initial image and table generation
     GenerateResources()
+    # create new thread for auto refresh of image and dataframe
+    thread1 = myThread(1, "AutoLoadThread")
+    # Start new Threads
+    thread1.setDaemon(True)
+    thread1.start()
 
     # do all the shit u want to do before app run below
     app.run(debug=True)
-    get_new_data_every(UPDATE_INTERVAL)
+
 
 
