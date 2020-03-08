@@ -75,11 +75,14 @@ def GenerateResources():
 
     # write the dataframe html to file
     html = df2.to_html()
+    dfJson = df2.to_json()
+    print(dfJson)
     global htmltable
     htmltable = html
     text_file = open("templates/CountryList.html", "w")
     text_file.write(html)
     text_file.close()
+    return dfJson
 
 # refresh the data , generate new data every 10 mins
 #schedule.every(10).minutes.do(GenerateResources)
@@ -92,6 +95,10 @@ def home():
 @app.route("/countrylist", methods=['GET'])
 def countrylist():
     return htmltable
+
+@app.route("/getjson", methods=['GET'])
+def getJson():
+    return render_template(json.html)
 
 @app.route("/refresh", methods=['GET'])
 def refresh():
