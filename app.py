@@ -69,6 +69,7 @@ def GenerateResources():
     plt.title('Country wise share of impact')
     plt.axis('equal')
     plt.savefig('static/PieChart.png')
+    plt.savefig('static/PieChart2.png')
     #close all plots to save memory
     plt.close("all")
 
