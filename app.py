@@ -107,10 +107,20 @@ def getJson():
 </head>
 <body>
 <h1>NCOVID-19 Information and statistics</h1>
-<h2>Bar chart of affected localities</h2>
-<div id='BarChartDiv'>
-<h2>Burden on each location</h2>
-<div id='PieChartDiv'>
+<h2>Bar chart of Cumulative cases</h2>
+<div id='BarChartAllDiv'>
+<h2>Bar chart of Active cases</h2>
+<div id='BarChartActiveDiv'>
+<h2>Bar chart of New cases</h2>
+<div id='BarChartNewCaseDiv'>
+
+<h2>Cumulative cases from each location</h2>
+<div id='PieChartAllDiv'>
+<h2>Current Active cases from each location</h2>
+<div id='PieChartActiveDiv'>
+<h2>New cases from each location</h2>
+<div id='PieChartNewCaseDiv'>
+
 <h2>Complete list of affected areas</h2>
 <p id="AffectedCountryTable">Pulling out the dat from several places.</p>
 
@@ -124,26 +134,49 @@ var txt = """
 var obj = JSON.parse(txt);
 Country=[];
 TotalCases=[];
-txt = "<table border='1'><tr><th>Country Or Location</th><th>Total Cases</th><th>New Cases</th><th>Total Deaths</th><th>Total Recovered</th><th>Active Cases</th></tr>"
+ActiveCases=[];
+NewCases=[];
+txt = "<table border='1'><tr><th>Country Or Location</th><th>Total Cases</th><th>Total Deaths</th><th>Total Recovered</th><th>Active Cases</th></tr>"
       for (x in obj['Country Or Location']) {
       Country.push(obj['Country Or Location'][x]);
       TotalCases.push(obj['Total Cases'][x]);
-        txt += "<tr><td>" + obj['Country Or Location'][x] + "</td><td>"+ obj['Total Cases'][x]  + "</td><td>"+ obj['New Cases'][x] + "</td><td>"+ obj['Total Deaths'][x] + "</td><td>"+ obj['Total Recovered'][x] + "</td><td>"+ obj['Active Cases'][x]+"</td></tr>";
+      ActiveCases.push(obj['Active Cases'][x]);
+      NewCases.push(obj['New Cases'][x]);
+        txt += "<tr><td>" + obj['Country Or Location'][x] + "</td><td>"+ obj['Total Cases'][x]  +  "</td><td>"+ obj['Total Deaths'][x] + "</td><td>"+ obj['Total Recovered'][x] + "</td><td>"+ obj['Active Cases'][x]+"</td></tr>";
       }
       txt += "</table>"    
       document.getElementById("AffectedCountryTable").innerHTML = txt;
       Country.pop();
       TotalCases.pop();
-      var barchartdata = [  { x: Country,    y: TotalCases,    type: 'bar'  }];
-      var piechartdata = [  { values:TotalCases ,    labels: Country ,    type: 'pie'  }];
-      var plotlayout = {  height: 600,  width: 700};
+      ActiveCases.pop();
+      NewCases.pop();
+      
+      var plotlayout = {  height: 500,  width: 600};
+      
+      var barchartdataAll = [  { x: Country,    y: TotalCases,    type: 'bar'  }];
+      var barchartdataActive = [  { x: Country,    y: ActiveCases,    type: 'bar'  }];
+      var barchartdataNewCase = [  { x: Country,    y: NewCases,    type: 'bar'  }];
+      
+      var piechartdataAll = [  { values:TotalCases ,    labels: Country ,    type: 'pie'  }];
+      var piechartdataActive = [  { values:ActiveCases ,    labels: Country ,    type: 'pie'  }];
+      var piechartdataNewCase = [  { values:NewCases ,    labels: Country ,    type: 'pie'  }];
+      
 
-Plotly.newPlot('BarChartDiv', barchartdata, plotlayout);
-Plotly.newPlot('PieChartDiv', piechartdata, plotlayout);
+Plotly.newPlot('BarChartAllDiv', barchartdataAll, plotlayout);
+Plotly.newPlot('BarChartActiveDiv', barchartdataActive, plotlayout);
+Plotly.newPlot('BarChartNewCaseDiv', barchartdataNewCase, plotlayout);
+
+Plotly.newPlot('PieChartAllDiv', piechartdataAll, plotlayout);
+Plotly.newPlot('PieChartActiveDiv', piechartdataActive, plotlayout);
+Plotly.newPlot('PieChartNewCaseDiv', piechartdataNewCase, plotlayout);
 
 
 
 </script>
+<!-- hitwebcounter Code START -->
+<a href="https://www.hitwebcounter.com" target="_blank">
+<img src="https://hitwebcounter.com/counter/counter.php?page=7206213&style=0038&nbdigits=9&type=page&initCount=0" title="User Stats" Alt="webcounterwebsite"   border="0" >
+</a> 
 </body>
 </html>
     """
