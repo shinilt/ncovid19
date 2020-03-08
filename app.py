@@ -12,6 +12,7 @@ matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import threading
 import seaborn as sns
+from lxml import etree
 
 
 class myThread (threading.Thread):
@@ -110,7 +111,7 @@ def getJson():
 <div id='BarChartDiv'>
 <h2>Burden on each location</h2>
 <div id='PieChartDiv'>
-<h2>Complete list of affected places</h2>
+<h2>Complete list of affected areas</h2>
 <p id="AffectedCountryTable">Pulling out the dat from several places.</p>
 
 
@@ -135,9 +136,10 @@ txt = "<table border='1'><tr><th>Country Or Location</th><th>Total Cases</th><th
       TotalCases.pop();
       var barchartdata = [  { x: Country,    y: TotalCases,    type: 'bar'  }];
       var piechartdata = [  { values:TotalCases ,    labels: Country ,    type: 'pie'  }];
+      var plotlayout = {  height: 600,  width: 700};
 
-Plotly.newPlot('BarChartDiv', barchartdata);
-Plotly.newPlot('PieChartDiv', piechartdata);
+Plotly.newPlot('BarChartDiv', barchartdata, plotlayout);
+Plotly.newPlot('PieChartDiv', piechartdata, plotlayout);
 
 
 
