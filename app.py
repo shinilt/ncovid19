@@ -74,7 +74,8 @@ def GenerateResources():
 
     # write the dataframe html to file
     html = df2.to_html()
-    htmltable=html
+    global htmltable
+    htmltable = html
     text_file = open("templates/CountryList.html", "w")
     text_file.write(html)
     text_file.close()
