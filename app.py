@@ -12,7 +12,7 @@ matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import threading
 import seaborn as sns
-import lxml
+
 
 class myThread (threading.Thread):
     def __init__(self, threadID, name):
