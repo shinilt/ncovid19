@@ -1,28 +1,102 @@
 <!DOCTYPE html>
 <html>
-<body>
+<head>
+    <title>Corona Virus Updates and Statistics</title>
+	<!-- Load plotly.js into the DOM -->
+	<script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
+</head>
+<body onload="getData()">
+<h1>NCOVID-19 Information and statistics</h1>
+<div id='DataLoadStatus'>
+<h2>Cumulative cases</h2>
+<div id='BarChartAllDiv'>
+<h2>Active cases</h2>
+<div id='BarChartActiveDiv'>
+<h2>New cases</h2>
+<div id='BarChartNewCaseDiv'>
+<h2>Total Death stats</h2>
+<div id='BarChartTotalDeathsDiv'>
 
-<h2>Content as Array.</h2>
-<p>Content written as an JSON array will be converted into a JavaScript array.</p>
 
-<p id="demo"></p>
-<p id="demo1"></p>
+<h2>Cumulative cases</h2>
+<div id='PieChartAllDiv'>
+<h2>Current Active cases</h2>
+<div id='PieChartActiveDiv'>
+<h2>New cases</h2>
+<div id='PieChartNewCaseDiv'>
+<h2>Total Deaths</h2>
+<div id='PieChartTotalDeathsDiv'>
+
+<h2>Complete list of affected regions</h2>
+<p id="AffectedCountryTable">Looking for the latest data...</p>
+
+
+<div id='text1'>
+<div id='text2'>
 <script>
-var xmlhttp = new XMLHttpRequest();
-xmlhttp.onreadystatechange = function() {
-  if (this.readyState == 4 && this.status == 0) {
-	document.getElementById("demo1").innerHTML = this.status;
-    var myArr = JSON.parse(this.responseText);
-	document.getElementById("demo1").innerHTML = 'some';
-    document.getElementById("demo").innerHTML = myArr;
-  }
-  else {document.getElementById("demo").innerHTML=this.status;}
-};
-xmlhttp.open("GET", "https://ncovid19.herokuapp.com/getjson");
-xmlhttp.send();
+
+function getData() {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+    var txt = this.responseText;	
+	var obj = JSON.parse(txt);
+	Country=[];
+TotalCases=[];
+ActiveCases=[];
+NewCases=[];
+TotalDeaths=[];
+txt = "<table border='1'><tr><th>Country Or Location</th><th>Total Cases</th><th>Total Deaths</th><th>Total Recovered</th><th>Active Cases</th></tr>"
+      for (x in obj['Country Or Location']) {
+      Country.push(obj['Country Or Location'][x]);
+      TotalCases.push(obj['Total Cases'][x]);
+      ActiveCases.push(obj['Active Cases'][x]);
+      NewCases.push(obj['New Cases'][x]);
+      TotalDeaths.push(obj['Total Deaths'][x]);
+      txt += "<tr><td>" + obj['Country Or Location'][x] + "</td><td>"+ obj['Total Cases'][x]  +  "</td><td>"+ obj['Total Deaths'][x] + "</td><td>"+ obj['Total Recovered'][x] + "</td><td>"+ obj['Active Cases'][x]+"</td></tr>";
+      }
+      txt += "</table>"    
+      document.getElementById("AffectedCountryTable").innerHTML = txt;
+	  Country.pop();
+      TotalCases.pop();
+      ActiveCases.pop();
+      NewCases.pop();
+      TotalDeaths.pop();
+      
+      var plotlayout = {  height: 400,  width: 500};
+      
+      var barchartdataAll = [  { x: Country,    y: TotalCases,    type: 'bar'  }];
+      var barchartdataActive = [  { x: Country,    y: ActiveCases,    type: 'bar'  }];
+      var barchartdataNewCase = [  { x: Country,    y: NewCases,    type: 'bar'  }];
+      var barchartdataTotalDeaths = [  { x: Country,    y: TotalDeaths,    type: 'bar'  }];
+      
+      var piechartdataAll = [  { values:TotalCases ,    labels: Country ,    type: 'pie'  }];
+      var piechartdataActive = [  { values:ActiveCases ,    labels: Country ,    type: 'pie'  }];
+      var piechartdataNewCase = [  { values:NewCases ,    labels: Country ,    type: 'pie'  }];
+      var piechartdataTotalDeaths = [  { values:TotalDeaths ,    labels: Country ,    type: 'pie'  }];
+      
+
+Plotly.newPlot('BarChartAllDiv', barchartdataAll, plotlayout);
+Plotly.newPlot('BarChartActiveDiv', barchartdataActive, plotlayout);
+Plotly.newPlot('BarChartNewCaseDiv', barchartdataNewCase, plotlayout);
+Plotly.newPlot('BarChartTotalDeathsDiv', barchartdataTotalDeaths, plotlayout);
+
+Plotly.newPlot('PieChartAllDiv', piechartdataAll, plotlayout);
+Plotly.newPlot('PieChartActiveDiv', piechartdataActive, plotlayout);
+Plotly.newPlot('PieChartNewCaseDiv', piechartdataNewCase, plotlayout);
+Plotly.newPlot('PieChartTotalDeathsDiv', piechartdataTotalDeaths, plotlayout);
+    }
+	
+  };
+  xhttp.open("GET", "/getdata", true);
+  xhttp.send();
+}
+
+
 </script>
-
-
+<!-- hitwebcounter Code START -->
+<a href="https://www.hitwebcounter.com" target="_blank">
+<img src="https://hitwebcounter.com/counter/counter.php?page=7206213&style=0038&nbdigits=9&type=page&initCount=0" title="User Stats" Alt="webcounterwebsite"   border="0" >
+</a> 
 </body>
 </html>
-
