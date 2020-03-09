@@ -99,13 +99,18 @@ def Index():
 def getdata():
     # this method will fetch the current value of the complete dataframe json and return
     global dataframejson
-    return Response(dataframejson, 200)
+    if len(dataframejson)>1:
+        return Response(dataframejson, 200)
+    else:
+        dataframejson = GenerateResources()
+        return Response(dataframejson, 200)
+
 
 
 
 if __name__ == "__main__":
     # create new thread for auto refresh of the dataframe
-    dataframejson = GenerateResources()
+    GenerateResources()
     thread1 = myThread(1, "AutoLoadThread")
     # Start new Threads
     thread1.setDaemon(True)
