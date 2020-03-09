@@ -105,6 +105,7 @@ def getdata():
 
 if __name__ == "__main__":
     # create new thread for auto refresh of the dataframe
+    dataframejson = GenerateResources()
     thread1 = myThread(1, "AutoLoadThread")
     # Start new Threads
     thread1.setDaemon(True)
