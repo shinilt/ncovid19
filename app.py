@@ -102,24 +102,30 @@ def getJson():
     <!DOCTYPE html>
 <html>
 <head>
+    <title>Corona Virus Updates and Statistics</title>
 	<!-- Load plotly.js into the DOM -->
 	<script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
 </head>
 <body>
 <h1>NCOVID-19 Information and statistics</h1>
-<h2>Bar chart of Cumulative cases</h2>
+<h2>Cumulative cases</h2>
 <div id='BarChartAllDiv'>
-<h2>Bar chart of Active cases</h2>
+<h2>Active cases</h2>
 <div id='BarChartActiveDiv'>
-<h2>Bar chart of New cases</h2>
+<h2>New cases</h2>
 <div id='BarChartNewCaseDiv'>
+<h2>Total Death stats</h2>
+<div id='BarChartTotalDeathsDiv'>
 
-<h2>Cumulative cases from each location</h2>
+
+<h2>Cumulative cases</h2>
 <div id='PieChartAllDiv'>
-<h2>Current Active cases from each location</h2>
+<h2>Current Active cases</h2>
 <div id='PieChartActiveDiv'>
-<h2>New cases from each location</h2>
+<h2>New cases</h2>
 <div id='PieChartNewCaseDiv'>
+<h2>Total Deaths</h2>
+<div id='PieChartTotalDeathsDiv'>
 
 <h2>Complete list of affected areas</h2>
 <p id="AffectedCountryTable">Pulling out the dat from several places.</p>
@@ -136,12 +142,14 @@ Country=[];
 TotalCases=[];
 ActiveCases=[];
 NewCases=[];
+TotalDeaths=[];
 txt = "<table border='1'><tr><th>Country Or Location</th><th>Total Cases</th><th>Total Deaths</th><th>Total Recovered</th><th>Active Cases</th></tr>"
       for (x in obj['Country Or Location']) {
       Country.push(obj['Country Or Location'][x]);
       TotalCases.push(obj['Total Cases'][x]);
       ActiveCases.push(obj['Active Cases'][x]);
       NewCases.push(obj['New Cases'][x]);
+      TotalDeaths.push(obj['Total Deaths'][x]);
         txt += "<tr><td>" + obj['Country Or Location'][x] + "</td><td>"+ obj['Total Cases'][x]  +  "</td><td>"+ obj['Total Deaths'][x] + "</td><td>"+ obj['Total Recovered'][x] + "</td><td>"+ obj['Active Cases'][x]+"</td></tr>";
       }
       txt += "</table>"    
@@ -150,25 +158,30 @@ txt = "<table border='1'><tr><th>Country Or Location</th><th>Total Cases</th><th
       TotalCases.pop();
       ActiveCases.pop();
       NewCases.pop();
+      TotalDeaths.pop();
       
-      var plotlayout = {  height: 500,  width: 600};
+      var plotlayout = {  height: 400,  width: 500};
       
       var barchartdataAll = [  { x: Country,    y: TotalCases,    type: 'bar'  }];
       var barchartdataActive = [  { x: Country,    y: ActiveCases,    type: 'bar'  }];
       var barchartdataNewCase = [  { x: Country,    y: NewCases,    type: 'bar'  }];
+      var barchartdataTotalDeaths = [  { x: Country,    y: TotalDeaths,    type: 'bar'  }];
       
       var piechartdataAll = [  { values:TotalCases ,    labels: Country ,    type: 'pie'  }];
       var piechartdataActive = [  { values:ActiveCases ,    labels: Country ,    type: 'pie'  }];
       var piechartdataNewCase = [  { values:NewCases ,    labels: Country ,    type: 'pie'  }];
+      var piechartdataTotalDeaths = [  { values:TotalDeaths ,    labels: Country ,    type: 'pie'  }];
       
 
 Plotly.newPlot('BarChartAllDiv', barchartdataAll, plotlayout);
 Plotly.newPlot('BarChartActiveDiv', barchartdataActive, plotlayout);
 Plotly.newPlot('BarChartNewCaseDiv', barchartdataNewCase, plotlayout);
+Plotly.newPlot('BarChartTotalDeathsDiv', barchartdataTotalDeaths, plotlayout);
 
 Plotly.newPlot('PieChartAllDiv', piechartdataAll, plotlayout);
 Plotly.newPlot('PieChartActiveDiv', piechartdataActive, plotlayout);
 Plotly.newPlot('PieChartNewCaseDiv', piechartdataNewCase, plotlayout);
+Plotly.newPlot('PieChartTotalDeathsDiv', piechartdataTotalDeaths, plotlayout);
 
 
 
