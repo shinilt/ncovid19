@@ -99,13 +99,18 @@ def Index():
 def getdata():
     # this method will fetch the current value of the complete dataframe json and return
     global dataframejson
-    if len(dataframejson)>1:
+    if len(dataframejson) > 1:
         return Response(dataframejson, 200)
     else:
         dataframejson = GenerateResources()
         return Response(dataframejson, 200)
 
-
+@app.route("/manualrefresh", methods=['GET'])
+def manualrefresh():
+    # this is to manually verify the data correctness
+    global dataframejson
+    dataframejson = GenerateResources()
+    return GenerateResources()
 
 
 if __name__ == "__main__":
