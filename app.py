@@ -30,6 +30,7 @@ class myThread (threading.Thread):
 app = Flask(__name__)
 mydataframe = ""
 dataframejson = ""
+mapdatajson=""
 
 def get_new_data_every(period):
 
@@ -125,10 +126,12 @@ def maps():
 def getmapdata():
     # this is to supply the info for plotting data on the map
     global mydataframe
+    global mapdatajson
     returndata='{'
-    for x in mydataframe['Country Or Location']:
+    try:
+        for x in mydataframe['Country Or Location']:
 
-        latlondata = {"Andorra": {"lat": "42.546245", "lon": "1.6015540000000001"},
+            latlondata = {"Andorra": {"lat": "42.546245", "lon": "1.6015540000000001"},
                       "United Arab Emirates": {"lat": "23.424076", "lon": "53.847818000000004"},
                       "Afghanistan": {"lat": "33.93911", "lon": "67.709953"},
                       "Antigua and Barbuda": {"lat": "17.060816", "lon": "-61.796428000000006"},
@@ -375,18 +378,22 @@ def getmapdata():
                       "Zambia": {"lat": "-13.133897", "lon": "27.849332"},
                       "Zimbabwe": {"lat": "-19.015438", "lon": "29.154857"}}
 
-        #below for loop drama is to read the cell value from df
-        for activecase in mydataframe[mydataframe["Country Or Location"] == x]["Active Cases"]:
-            currentActiveCase = str(activecase)
+            #below for loop drama is to read the cell value from df
+            for activecase in mydataframe[mydataframe["Country Or Location"] == x]["Active Cases"]:
+                currentActiveCase = str(activecase)
 
-        if (x in latlondata):
-            returndata = returndata + '"' + x + '":{"lat":"' + latlondata[x]['lat'] + '","lon":"' + latlondata[x]['lon'] + '","activecases":"' + currentActiveCase + '"},'
-        else:
-            pass
-    returndata = returndata[:-1]+ '}'
+            if (x in latlondata):
+                returndata = returndata + '"' + x + '":{"lat":"' + latlondata[x]['lat'] + '","lon":"' + latlondata[x]['lon'] + '","activecases":"' + currentActiveCase + '"},'
+            else:
+                pass
+        #to remove the last comma
+        returndata = returndata[:-1] + '}'
+        global mapdatajson
+        mapdatajson = returndata
+        return mapdatajson
+    except:
 
-
-    return returndata
+        return mapdatajson
 
 if __name__ == "__main__":
     # create new thread for auto refresh of the dataframe
