@@ -132,7 +132,7 @@ def getmapdata():
         for x in mydataframe['Country Or Location']:
 
             latlondata = {"Andorra": {"lat": "42.546245", "lon": "1.6015540000000001"},
-                      "United Arab Emirates": {"lat": "23.424076", "lon": "53.847818000000004"},
+                      "UAE": {"lat": "23.424076", "lon": "53.847818000000004"},
                       "Afghanistan": {"lat": "33.93911", "lon": "67.709953"},
                       "Antigua and Barbuda": {"lat": "17.060816", "lon": "-61.796428000000006"},
                       "Anguilla": {"lat": "18.220554", "lon": "-63.068615"},
@@ -168,11 +168,11 @@ def getmapdata():
                       "Belize": {"lat": "17.189877", "lon": "-88.49765"},
                       "Canada": {"lat": "56.130366", "lon": "-106.34677099999999"},
                       "Cocos [Keeling] Islands": {"lat": "-12.164164999999999", "lon": "96.870956"},
-                      "Congo [DRC]": {"lat": "-4.038333000000001", "lon": "21.758664000000003"},
-                      "Central African Republic": {"lat": "6.611111", "lon": "20.939444"},
+                      "DRC": {"lat": "-4.038333000000001", "lon": "21.758664000000003"},
+                      "CAR": {"lat": "6.611111", "lon": "20.939444"},
                       "Congo [Republic]": {"lat": "-0.228021", "lon": "15.827658999999999"},
                       "Switzerland": {"lat": "46.818188", "lon": "8.227511999999999"},
-                      "Côte d'Ivoire": {"lat": "7.539989", "lon": "-5.54708"},
+                      "Ivory Coast": {"lat": "7.539989", "lon": "-5.54708"},
                       "Cook Islands": {"lat": "-21.236735999999997", "lon": "-159.777671"},
                       "Chile": {"lat": "-35.675146999999996", "lon": "-71.542969"},
                       "Cameroon": {"lat": "7.369722", "lon": "12.354722"},
@@ -183,7 +183,7 @@ def getmapdata():
                       "Cape Verde": {"lat": "16.002082", "lon": "-24.013197"},
                       "Christmas Island": {"lat": "-10.447525", "lon": "105.690449"},
                       "Cyprus": {"lat": "35.126413", "lon": "33.429859"},
-                      "Czech Republic": {"lat": "49.817492", "lon": "15.472961999999999"},
+                      "Czechia": {"lat": "49.817492", "lon": "15.472961999999999"},
                       "Germany": {"lat": "51.165690999999995", "lon": "10.451526"},
                       "Djibouti": {"lat": "11.825138", "lon": "42.590275"},
                       "Denmark": {"lat": "56.26392", "lon": "9.501785"},
@@ -201,14 +201,14 @@ def getmapdata():
                       "Fiji": {"lat": "-16.578193", "lon": "179.414413"},
                       "Falkland Islands [Islas Malvinas]": {"lat": "-51.796253", "lon": "-59.523613"},
                       "Micronesia": {"lat": "7.425553999999999", "lon": "150.550812"},
-                      "Faroe Islands": {"lat": "61.892635", "lon": "-6.9118059999999995"},
+                      "Faeroe Islands": {"lat": "61.892635", "lon": "-6.9118059999999995"},
                       "France": {"lat": "46.227638", "lon": "2.213749"},
                       "Gabon": {"lat": "-0.803689", "lon": "11.609444"},
-                      "United Kingdom": {"lat": "55.378051", "lon": "-3.435973"},
+                      "UK": {"lat": "55.378051", "lon": "-3.435973"},
                       "Grenada": {"lat": "12.262775999999999", "lon": "-61.604170999999994"},
                       "Georgia": {"lat": "42.315407", "lon": "43.356891999999995"},
                       "French Guiana": {"lat": "3.9338889999999997", "lon": "-53.125781999999994"},
-                      "Guernsey": {"lat": "49.465691", "lon": "-2.5852779999999997"},
+                      "Channel Islands": {"lat": "49.465691", "lon": "-2.5852779999999997"},
                       "Ghana": {"lat": "7.946527000000001", "lon": "-1.0231940000000002"},
                       "Gibraltar": {"lat": "36.137741", "lon": "-5.345374"},
                       "Greenland": {"lat": "71.706936", "lon": "-42.604303"},
@@ -251,7 +251,7 @@ def getmapdata():
                       "Comoros": {"lat": "-11.875001", "lon": "43.872219"},
                       "Saint Kitts and Nevis": {"lat": "17.357822", "lon": "-62.782998"},
                       "North Korea": {"lat": "40.339852", "lon": "127.510093"},
-                      "South Korea": {"lat": "35.907757000000004", "lon": "127.766922"},
+                      "S. Korea": {"lat": "35.907757000000004", "lon": "127.766922"},
                       "Kuwait": {"lat": "29.311659999999996", "lon": "47.481766"},
                       "Cayman Islands": {"lat": "19.513469", "lon": "-80.566956"},
                       "Kazakhstan": {"lat": "48.019573", "lon": "66.923684"},
@@ -272,11 +272,11 @@ def getmapdata():
                       "Montenegro": {"lat": "42.708678000000006", "lon": "19.37439"},
                       "Madagascar": {"lat": "-18.766947000000002", "lon": "46.869107"},
                       "Marshall Islands": {"lat": "7.131474000000001", "lon": "171.184478"},
-                      "Macedonia [FYROM]": {"lat": "41.608635", "lon": "21.745275"},
+                      "North Macedonia": {"lat": "41.608635", "lon": "21.745275"},
                       "Mali": {"lat": "17.570692", "lon": "-3.9961660000000006"},
                       "Myanmar [Burma]": {"lat": "21.913965", "lon": "95.956223"},
                       "Mongolia": {"lat": "46.862496", "lon": "103.84665600000001"},
-                      "Macau": {"lat": "22.198745000000002", "lon": "113.543873"},
+                      "Macao": {"lat": "22.198745000000002", "lon": "113.543873"},
                       "Northern Mariana Islands": {"lat": "17.33083", "lon": "145.38468999999998"},
                       "Martinique": {"lat": "14.641528", "lon": "-61.024174"},
                       "Mauritania": {"lat": "21.00789", "lon": "-10.940835"},
@@ -311,7 +311,7 @@ def getmapdata():
                       "Saint Pierre and Miquelon": {"lat": "46.941936", "lon": "-56.27111"},
                       "Pitcairn Islands": {"lat": "-24.703615", "lon": "-127.43930800000001"},
                       "Puerto Rico": {"lat": "18.220833", "lon": "-66.590149"},
-                      "Palestinian Territories": {"lat": "31.952162", "lon": "35.233154"},
+                      "Palestine": {"lat": "31.952162", "lon": "35.233154"},
                       "Portugal": {"lat": "39.399871999999995", "lon": "-8.224454"},
                       "Palau": {"lat": "7.51498", "lon": "134.58252"},
                       "Paraguay": {"lat": "-23.442503", "lon": "-58.44383199999999"},
@@ -359,11 +359,11 @@ def getmapdata():
                       "Ukraine": {"lat": "48.379433", "lon": "31.16558"},
                       "Uganda": {"lat": "1.373333", "lon": "32.290275"},
                       "U.S. Minor Outlying Islands": {"lat": "nan", "lon": "nan"},
-                      "United States": {"lat": "37.09024", "lon": "-95.712891"},
+                      "USA": {"lat": "37.09024", "lon": "-95.712891"},
                       "Uruguay": {"lat": "-32.522779", "lon": "-55.765834999999996"},
                       "Uzbekistan": {"lat": "41.377491", "lon": "64.585262"},
                       "Vatican City": {"lat": "41.902916", "lon": "12.453389"},
-                      "Saint Vincent and the Grenadines": {"lat": "12.984305", "lon": "-61.287228000000006"},
+                      "St. Vincent Grenadines": {"lat": "12.984305", "lon": "-61.287228000000006"},
                       "Venezuela": {"lat": "6.42375", "lon": "-66.58973"},
                       "British Virgin Islands": {"lat": "18.420695000000002", "lon": "-64.63996800000001"},
                       "U.S. Virgin Islands": {"lat": "18.335765", "lon": "-64.896335"},
@@ -376,6 +376,10 @@ def getmapdata():
                       "Mayotte": {"lat": "-12.8275", "lon": "45.166244"},
                       "South Africa": {"lat": "-30.559482", "lon": "22.937506"},
                       "Zambia": {"lat": "-13.133897", "lon": "27.849332"},
+					  "Saint Martin": {"lat": "18.070829", "lon": "-63.050079"},
+					  "Eswatini": {"lat": "-26.606630", "lon": "31.478365"},
+					  "St. Barth": {"lat": "17.898781", "lon": "-62.824279"},
+					  "Curaçao": {"lat": "12.138120", "lon": "-68.927072"},
                       "Zimbabwe": {"lat": "-19.015438", "lon": "29.154857"}}
 
             #below for loop drama is to read the cell value from df
@@ -394,6 +398,11 @@ def getmapdata():
     except:
 
         return mapdatajson
+
+@app.route("/bounties", methods=['GET'])
+def bounties():
+    # this is to render the map page with details
+    return render_template("bounties.html")
 
 if __name__ == "__main__":
     # create new thread for auto refresh of the dataframe
