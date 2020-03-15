@@ -7,7 +7,45 @@
 	<link rel="shortcut icon" type="image/x-icon" href="docs/images/favicon.ico" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin=""/>
     <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js" integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew==" crossorigin=""></script>
-<script>
+<style>
+* {
+  box-sizing: border-box;
+}
+.menu {
+  float:center;
+  width:20%;
+  text-align:center;
+}
+.menu a {
+  background-color:#e5e5e5;
+  padding:8px;
+  margin-top:7px;
+  display:block;
+  width:100%;
+  color:black;
+}
+.main {
+  float:left;
+  width:60%;
+  padding:0 20px;
+}
+.right {
+  background-color:#e5e5e5;
+  float:left;
+  width:20%;
+  padding:15px;
+  margin-top:7px;
+  text-align:center;
+}
+
+@media only screen and (max-width:620px) {
+  /* For mobile phones: */
+  .menu, .main, .right {
+    width:100%;
+  }
+}
+</style>
+	<script>
 function getMapData() {
 var mymap = L.map('mapid').setView([51.505, -0.09], 2);
 	L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
@@ -51,12 +89,19 @@ circle.bindPopup(x + ' :  '+ obj[x].activecases);
 </script>
 </head>
 <body onload="getMapData()">
+<div style="background-color:#e5e5e5;padding:15px;text-align:center;">
+  <h1>NCOVID-19 Current active cases on map</h1>
+</div>
+<div style="overflow:auto">
+  <div class="menu">
+    <td><tr><a href="/">Tables and Charts </a></tr>
+       <tr> <a href="#">Maps </a> </tr></td>
+
+  </div>
 <div id="mapid" style="width: 600px; height: 400px;"></div>
 <div id="text" ></div>
+	<br>
+
 <div id="text2" ></div>
-<script>
-
-
-</script>
 </body>
 </html>

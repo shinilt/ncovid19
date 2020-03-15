@@ -4,9 +4,59 @@
     <title>Corona Virus Updates and Statistics</title>
 	<!-- Load plotly.js into the DOM -->
 	<script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+* {
+  box-sizing: border-box;
+}
+.menu {
+  float:center;
+  width:20%;
+  text-align:center;
+}
+.menu a {
+  background-color:#e5e5e5;
+  padding:8px;
+  margin-top:7px;
+  display:block;
+  width:100%;
+  color:black;
+}
+.main {
+  float:left;
+  width:60%;
+  padding:0 20px;
+}
+.right {
+  background-color:#e5e5e5;
+  float:left;
+  width:20%;
+  padding:15px;
+  margin-top:7px;
+  text-align:center;
+}
+
+@media only screen and (max-width:620px) {
+  /* For mobile phones: */
+  .menu, .main, .right {
+    width:100%;
+  }
+}
+</style>
 </head>
 <body onload="getData()">
-<h1>NCOVID-19 Information and statistics</h1>
+<div style="background-color:#e5e5e5;padding:15px;text-align:center;">
+  <h1>NCOVID-19 Information and statistics</h1>
+</div>
+<div style="overflow:auto">
+  <div class="menu">
+    <td><tr><a href="#">Tables and Charts </a></tr>
+       <tr> <a href="/maps">Maps </a> </tr></td>
+
+  </div>
+
+
+
 <div id='DataLoadStatus'>
 <h2>Cumulative cases</h2>
 <div id='BarChartAllDiv'>
@@ -28,7 +78,7 @@
 <div id='PieChartTotalDeathsDiv'>
 
 <h2>Complete list of affected regions</h2>
-<p id="AffectedCountryTable">Looking for the latest data...</p>
+<p id="AffectedCountryTable">Fetching for the latest data...</p>
 
 
 <div id='text1'>
