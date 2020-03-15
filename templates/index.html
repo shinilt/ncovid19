@@ -1,92 +1,127 @@
 <!DOCTYPE html>
+<!-- Template by QHMit.com -->
 <html>
 <head>
-    <title>Corona Virus Updates and Statistics</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>Corona Virus Updates and Statistics</title>
 	<!-- Load plotly.js into the DOM -->
 	<script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<style>
-* {
-  box-sizing: border-box;
-}
-.menu {
-  float:center;
-  width:20%;
-  text-align:center;
-}
-.menu a {
-  background-color:#e5e5e5;
-  padding:8px;
-  margin-top:7px;
-  display:block;
-  width:100%;
-  color:black;
-}
-.main {
-  float:left;
-  width:60%;
-  padding:0 20px;
-}
-.right {
-  background-color:#e5e5e5;
-  float:left;
-  width:20%;
-  padding:15px;
-  margin-top:7px;
-  text-align:center;
-}
+	<style type="text/css">
 
-@media only screen and (max-width:620px) {
-  /* For mobile phones: */
-  .menu, .main, .right {
-    width:100%;
-  }
-}
-</style>
-</head>
-<body onload="getData()">
-<div style="background-color:#e5e5e5;padding:15px;text-align:center;">
-  <h1>NCOVID-19 Information and statistics</h1>
-</div>
-<div style="overflow:auto">
-  <div class="menu">
-    <td><tr><a href="#">Tables and Charts </a></tr>
-       <tr> <a href="/maps">Maps </a> </tr></td>
-       <tr> <a href="/bounties">Bounties </a> </tr></td>
+		/* Layout */
+		body {
+			min-width: 630px;
+		}
 
-  </div>
+		#container {
+			padding-left: 200px;
+			padding-right: 190px;
+		}
+		
+		#container .column {
+			position: relative;
+			float: left;
+		}
+		
+		#center {
+			padding: 10px 20px;
+			width: 100%;
+		}
+		
+		#left {
+			width: 180px;
+			padding: 0 10px;
+			right: 240px;
+			margin-left: -100%;
+		}
+		
+		#right {
+			width: 130px;
+			padding: 0 10px;
+			margin-right: -100%;
+		}
+		
+		#footer {
+			clear: both;
+		}
+		
+		/* IE hack */
+		* html #left {
+			left: 150px;
+		}
 
-<h2>Cumulative cases</h2>
-<div id='BarChartAllDiv'>
+		/* Make the columns the same height as each other */
+		#container {
+			overflow: hidden;
+		}
 
-<h2>Cumulative cases</h2>
-<div id='PieChartAllDiv'>
+		#container .column {
+			padding-bottom: 1001em;
+			margin-bottom: -1000em;
+		}
 
-<h2>Active cases</h2>
-<div id='BarChartActiveDiv'>
+		/* Fix for the footer */
+		* html body {
+			overflow: hidden;
+		}
+		
+		* html #footer-wrapper {
+			float: left;
+			position: relative;
+			width: 100%;
+			padding-bottom: 10010px;
+			margin-bottom: -10000px;
+			background: #fff;
+		}
 
-    <h2>Current Active cases</h2>
-<div id='PieChartActiveDiv'>
+		/* Aesthetics */
+		body {
+			margin: 0;
+			padding: 0;
+			font-family:Sans-serif;
+			line-height: 1.5em;
+		}
+		
+		p {
+			color: #555;
+		}
 
-<h2>New cases</h2>
-<div id='BarChartNewCaseDiv'>
+		nav ul {
+			list-style-type: none;
+			margin: 0;
+			padding: 0;
+		}
+		
+		nav ul a {
+			color: darkgreen;
+			text-decoration: none;
+		}
 
-<h2>New cases</h2>
-<div id='PieChartNewCaseDiv'>
+		#header, #footer {
+			font-size: large;
+			padding: 0.3em;
+			background: #BCCE98;
+		}
 
-<h2>Total Deaths</h2>
-<div id='BarChartTotalDeathsDiv'>
+		#left {
+			background: #DAE9BC;
+		}
+		
+		#right {
+			background: #F7FDEB;
+		}
 
-<h2>Total Deaths</h2>
-<div id='PieChartTotalDeathsDiv'>
+		#center {
+			background: #fff;
+		}
 
-<h2>Complete list of affected regions</h2>
-<p id="AffectedCountryTable">Fetching for the latest data...</p>
-
-
-<div id='text1'>
-<div id='text2'>
-<script>
+		#container .column {
+			padding-top: 1em;
+		}
+		
+	</style>
+	<script>
 
 function getData() {
   var xhttp = new XMLHttpRequest();
@@ -150,6 +185,76 @@ Plotly.newPlot('PieChartTotalDeathsDiv', piechartdataTotalDeaths, plotlayout);
 
 
 </script>
+	
+</head>
+
+<body onload="getData()">
+
+	<header id="header"><p>NCOVID-19 Statistics</p></header>
+
+	<div id="container">
+
+		<main id="center" class="column">
+			<article>
+			
+				<h1>Statistics of ncovid-19 Global outbreak.</h1>
+				
+				<h3>Cumulative cases - bar chart</h3>
+				<div id='BarChartAllDiv'>
+				
+				<h3>Cumulative cases - pie chart</h3>
+				<div id='PieChartAllDiv'>
+				
+				
+				<h3>Active cases - bar chart</h3>
+				<div id='BarChartActiveDiv'>
+
+				<h3>Active cases - pie chart</h3>
+				<div id='PieChartActiveDiv'>
+
+				<h3>New cases - bar chart</h3>
+				<div id='BarChartNewCaseDiv'>
+
+				<h3>New cases - pie chart</h3>
+				<div id='PieChartNewCaseDiv'>
+
+				<h3>Total Deaths - bar chart</h3>
+				<div id='BarChartTotalDeathsDiv'>
+
+				<h3>Total Deaths - pie chart</h3>
+				<div id='PieChartTotalDeathsDiv'>
+
+				<h3>Complete list of affected regions</h3>
+				<p id="AffectedCountryTable">Fetching for the latest data...</p>
+				
+			</article>								
+		</main>
+
+		<nav id="left" class="column">
+			<h3>Data category</h3>
+			<ul>
+				<li><a href="#">Plots and graphs</a></li>
+				<li><a href="#">Tables</a></li>
+				<li><a href="#">APIs</a></li>
+				
+			</ul>
+			<h3>Maps</h3>
+			<ul>
+				<li><a href="/maps">Maps - Active cases NOW</a></li>
+				<li><a href="#">APIs</a></li>
+				
+			</ul>
+		
+		</nav>
+
+		
+
+	</div>
+
+	<div id="footer-wrapper">
+		<footer id="footer"><p>Built with html, js, plotly, python and so on..</p></footer>
+	</div>
 
 </body>
+
 </html>

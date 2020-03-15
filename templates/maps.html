@@ -1,50 +1,15 @@
 <!DOCTYPE html>
+<!-- Template by QHMit.com -->
 <html>
 <head>
-	<title>Corona Virus Statistics - Map Display</title>
-	<meta charset="utf-8" />
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>Corona Virus Updates and Statistics</title>
+	
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="shortcut icon" type="image/x-icon" href="docs/images/favicon.ico" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin=""/>
     <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js" integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew==" crossorigin=""></script>
-<style>
-* {
-  box-sizing: border-box;
-}
-.menu {
-  float:center;
-  width:20%;
-  text-align:center;
-}
-.menu a {
-  background-color:#e5e5e5;
-  padding:8px;
-  margin-top:7px;
-  display:block;
-  width:100%;
-  color:black;
-}
-.main {
-  float:left;
-  width:60%;
-  padding:0 20px;
-}
-.right {
-  background-color:#e5e5e5;
-  float:left;
-  width:20%;
-  padding:15px;
-  margin-top:7px;
-  text-align:center;
-}
-
-@media only screen and (max-width:620px) {
-  /* For mobile phones: */
-  .menu, .main, .right {
-    width:100%;
-  }
-}
-</style>
+	
 	<script>
 function getMapData() {
 var mymap = L.map('mapid').setView([51.505, -0.09], 2);
@@ -87,24 +52,166 @@ circle.bindPopup(x + ' :  '+ obj[x].activecases);
   xhttp.send();
 	}
 </script>
+	<style type="text/css">
+
+		/* Layout */
+		body {
+			min-width: 630px;
+		}
+
+		#container {
+			padding-left: 200px;
+			padding-right: 190px;
+		}
+		
+		#container .column {
+			position: relative;
+			float: left;
+		}
+		
+		#center {
+			padding: 10px 20px;
+			width: 100%;
+		}
+		
+		#left {
+			width: 180px;
+			padding: 0 10px;
+			right: 240px;
+			margin-left: -100%;
+		}
+		
+		#right {
+			width: 130px;
+			padding: 0 10px;
+			margin-right: -100%;
+		}
+		
+		#footer {
+			clear: both;
+		}
+		
+		/* IE hack */
+		* html #left {
+			left: 150px;
+		}
+
+		/* Make the columns the same height as each other */
+		#container {
+			overflow: hidden;
+		}
+
+		#container .column {
+			padding-bottom: 1001em;
+			margin-bottom: -1000em;
+		}
+
+		/* Fix for the footer */
+		* html body {
+			overflow: hidden;
+		}
+		
+		* html #footer-wrapper {
+			float: left;
+			position: relative;
+			width: 100%;
+			padding-bottom: 10010px;
+			margin-bottom: -10000px;
+			background: #fff;
+		}
+
+		/* Aesthetics */
+		body {
+			margin: 0;
+			padding: 0;
+			font-family:Sans-serif;
+			line-height: 1.5em;
+		}
+		
+		p {
+			color: #555;
+		}
+
+		nav ul {
+			list-style-type: none;
+			margin: 0;
+			padding: 0;
+		}
+		
+		nav ul a {
+			color: darkgreen;
+			text-decoration: none;
+		}
+
+		#header, #footer {
+			font-size: large;
+			padding: 0.3em;
+			background: #BCCE98;
+		}
+
+		#left {
+			background: #DAE9BC;
+		}
+		
+		#right {
+			background: #F7FDEB;
+		}
+
+		#center {
+			background: #fff;
+		}
+
+		#container .column {
+			padding-top: 1em;
+		}
+		
+	</style>
+
+	
 </head>
+
 <body onload="getMapData()">
-<div style="background-color:#e5e5e5;padding:15px;text-align:center;">
-  <h1>NCOVID-19 Active cases Map View</h1>
-</div>
-<div style="overflow:auto">
-  <div class="menu">
-    <td><tr><a href="/">Tables and Charts </a></tr>
-       <tr> <a href="#">Maps </a> </tr>
-      <tr> <a href="/bounties">Bounties</a> </tr></td>
 
+	<header id="header"><p>NCOVID-19 Spread anyalysis - Maps</p></header>
 
-  </div>
-    <div id="text" >The map shows the current number of active NCOVID-19 cases. The circles indicate the magnitude of the cases and not the regional boundary. Click/ tap on the circle to view the country and the number details.</div>
-<div id="mapid" style="width: 600px; height: 400px;"></div>
-<div id="text" ></div>
-	<br>
+	<div id="container">
 
-<div id="text2" ></div>
+		<main id="center" class="column">
+			<article>
+			
+				<h1>The locations with Active Cases</h1>
+				    <div id="text" >The map shows the current number of active NCOVID-19 cases. The circles indicate the magnitude of the cases and not the regional boundary. Click/ tap on the circle to view the country and the number details.</div>
+				<div id="mapid" style="width: 600px; height: 400px;"></div>
+				
+				
+			</article>								
+		</main>
+
+		<nav id="left" class="column">
+			<h3>Data category</h3>
+			<ul>
+				<li><a href="/">Plots and graphs</a></li>
+				<li><a href="/">Tables</a></li>
+				<li><a href="#">APIs</a></li>
+				
+			</ul>
+			<h3>Maps</h3>
+			<ul>
+				<li><a href="/maps">Maps - Active cases NOW</a></li>
+				<li><a href="#">APIs</a></li>
+				
+			</ul>
+		
+		</nav>
+
+		
+
+	</div>
+
+	<div id="footer-wrapper">
+		<footer id="footer"><p>Built with html, js, plotly, python and so on..</p></footer>
+	</div>
+
 </body>
+
 </html>
