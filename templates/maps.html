@@ -90,14 +90,17 @@ circle.bindPopup(x + ' :  '+ obj[x].activecases);
 </head>
 <body onload="getMapData()">
 <div style="background-color:#e5e5e5;padding:15px;text-align:center;">
-  <h1>NCOVID-19 Current active cases on map</h1>
+  <h1>NCOVID-19 Active cases Map View</h1>
 </div>
 <div style="overflow:auto">
   <div class="menu">
     <td><tr><a href="/">Tables and Charts </a></tr>
-       <tr> <a href="#">Maps </a> </tr></td>
+       <tr> <a href="#">Maps </a> </tr>
+      <tr> <a href="/bounties">Bounties</a> </tr></td>
+
 
   </div>
+    <div id="text" >The map shows the current number of active NCOVID-19 cases. The circles indicate the magnitude of the cases and not the regional boundary. Click/ tap on the circle to view the country and the number details.</div>
 <div id="mapid" style="width: 600px; height: 400px;"></div>
 <div id="text" ></div>
 	<br>

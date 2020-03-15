@@ -52,28 +52,31 @@
   <div class="menu">
     <td><tr><a href="#">Tables and Charts </a></tr>
        <tr> <a href="/maps">Maps </a> </tr></td>
+       <tr> <a href="/bounties">Bounties </a> </tr></td>
 
   </div>
 
-
-
-<div id='DataLoadStatus'>
 <h2>Cumulative cases</h2>
 <div id='BarChartAllDiv'>
-<h2>Active cases</h2>
-<div id='BarChartActiveDiv'>
-<h2>New cases</h2>
-<div id='BarChartNewCaseDiv'>
-<h2>Total Death stats</h2>
-<div id='BarChartTotalDeathsDiv'>
-
 
 <h2>Cumulative cases</h2>
 <div id='PieChartAllDiv'>
-<h2>Current Active cases</h2>
+
+<h2>Active cases</h2>
+<div id='BarChartActiveDiv'>
+
+    <h2>Current Active cases</h2>
 <div id='PieChartActiveDiv'>
+
+<h2>New cases</h2>
+<div id='BarChartNewCaseDiv'>
+
 <h2>New cases</h2>
 <div id='PieChartNewCaseDiv'>
+
+<h2>Total Deaths</h2>
+<div id='BarChartTotalDeathsDiv'>
+
 <h2>Total Deaths</h2>
 <div id='PieChartTotalDeathsDiv'>
 
@@ -127,14 +130,17 @@ txt = "<table border='1'><tr><th>Country Or Location</th><th>Total Cases</th><th
       
 
 Plotly.newPlot('BarChartAllDiv', barchartdataAll, plotlayout);
-Plotly.newPlot('BarChartActiveDiv', barchartdataActive, plotlayout);
-Plotly.newPlot('BarChartNewCaseDiv', barchartdataNewCase, plotlayout);
-Plotly.newPlot('BarChartTotalDeathsDiv', barchartdataTotalDeaths, plotlayout);
-
 Plotly.newPlot('PieChartAllDiv', piechartdataAll, plotlayout);
+
+Plotly.newPlot('BarChartActiveDiv', barchartdataActive, plotlayout);
 Plotly.newPlot('PieChartActiveDiv', piechartdataActive, plotlayout);
+
+Plotly.newPlot('BarChartNewCaseDiv', barchartdataNewCase, plotlayout);
 Plotly.newPlot('PieChartNewCaseDiv', piechartdataNewCase, plotlayout);
+
+Plotly.newPlot('BarChartTotalDeathsDiv', barchartdataTotalDeaths, plotlayout);
 Plotly.newPlot('PieChartTotalDeathsDiv', piechartdataTotalDeaths, plotlayout);
+
     }
 	
   };
@@ -144,9 +150,6 @@ Plotly.newPlot('PieChartTotalDeathsDiv', piechartdataTotalDeaths, plotlayout);
 
 
 </script>
-<!-- hitwebcounter Code START -->
-<a href="https://www.hitwebcounter.com" target="_blank">
-<img src="https://hitwebcounter.com/counter/counter.php?page=7206213&style=0038&nbdigits=9&type=page&initCount=0" title="User Stats" Alt="webcounterwebsite"   border="0" >
-</a> 
+
 </body>
 </html>
