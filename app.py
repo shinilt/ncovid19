@@ -13,6 +13,7 @@ import matplotlib.pyplot as plt
 import threading
 import seaborn as sns
 from lxml import etree
+import html5lib
 import json
 
 
@@ -403,6 +404,7 @@ def getmapdata():
 def bounties():
     # this is to render the map page with details
     return render_template("bounties.html")
+
 
 if __name__ == "__main__":
     # create new thread for auto refresh of the dataframe
