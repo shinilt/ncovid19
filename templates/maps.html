@@ -2,7 +2,7 @@
 <html lang="en">
 <title>Corona Virus Updates and Statistics</title>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0 , maximum-scale=1.0, user-scalable=no">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-black.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
@@ -106,7 +106,7 @@ circle.bindPopup(x + ' :  '+ obj[x].activecases);
     <div >
       <h1 class="w3-text-teal">NCOVID-19 Spread anyalysis - Maps</h1>
       <p>The map shows the current number of active NCOVID-19 cases. The circles indicate the magnitude of the cases and not the regional boundary. Click/ tap on the circle to view the country and the number details.</p>
-	  <div id="mapid" style="width: 600px; height: 400px;"></div>
+	  <div id="mapid" style="width: 400px; height: 400px;"></div>
     </div>
     
   </div>
@@ -140,9 +140,11 @@ var overlayBg = document.getElementById("myOverlay");
 // Toggle between showing and hiding the sidebar, and add overlay effect
 function w3_open() {
   if (mySidebar.style.display === 'block') {
+	document.getElementById("mapid").style.display = "block";
     mySidebar.style.display = 'none';
     overlayBg.style.display = "none";
   } else {
+	document.getElementById("mapid").style.display = "none";
     mySidebar.style.display = 'block';
     overlayBg.style.display = "block";
   }
@@ -150,6 +152,7 @@ function w3_open() {
 
 // Close the sidebar with the close button
 function w3_close() {
+  document.getElementById("mapid").style.display = "block";
   mySidebar.style.display = "none";
   overlayBg.style.display = "none";
 }
