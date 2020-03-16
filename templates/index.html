@@ -51,7 +51,7 @@ txt = "<table border='1'><tr><th>Country Or Location</th><th>Total Cases</th><th
       NewCases.pop();
       TotalDeaths.pop();
       
-      var plotlayout = { height: 400, width: 500,font: {size: 10}};
+      var plotlayout = { responsive: true,font: {size: 10}};
 	  var config = {responsive: false};
       
       var barchartdataAll = [  { x: Country,    y: TotalCases,    type: 'bar'  }];
