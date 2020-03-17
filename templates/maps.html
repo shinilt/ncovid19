@@ -23,7 +23,7 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif;}
 </style>
 <script>
 function getMapData() {
-var mymap = L.map('mapid').setView([51.505, -0.09], 2);
+var mymap = L.map('mapid').setView([32.427908, 53.68804599999999], 2);
 	L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
 		maxZoom: 18,
 		attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
@@ -34,7 +34,7 @@ var mymap = L.map('mapid').setView([51.505, -0.09], 2);
 		zoomOffset: -1
 	}).addTo(mymap);
 	
-var myTotalmap = L.map('totalcasesmapid').setView([51.505, -0.09], 2);
+var myTotalmap = L.map('totalcasesmapid').setView([32.427908, 53.68804599999999], 2);
 	L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
 		maxZoom: 18,
 		attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
@@ -44,6 +44,18 @@ var myTotalmap = L.map('totalcasesmapid').setView([51.505, -0.09], 2);
 		tileSize: 512,
 		zoomOffset: -1
 	}).addTo(myTotalmap);
+	
+	
+var myNewCasemap = L.map('newcasemapid').setView([32.427908, 53.68804599999999], 2);
+	L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
+		maxZoom: 18,
+		attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
+			'<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+			'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+		id: 'mapbox/streets-v11',
+		tileSize: 512,
+		zoomOffset: -1
+	}).addTo(myNewCasemap);
 
 
   var xhttp = new XMLHttpRequest();
@@ -59,9 +71,9 @@ var circle = L.circle([obj[x].lat, obj[x].lon], {
     color: 'red',
     fillColor: '#f03',
     fillOpacity: 0.5,
-    radius: obj[x].activecases * 100
+    radius: obj[x].activecases * 60
 }).addTo(mymap);
-circle.bindPopup(x + ' :  '+ obj[x].activecases);
+circle.bindPopup(x + ' : Active '+ obj[x].activecases);
 
 var Totalcircle = L.circle([obj[x].lat, obj[x].lon], {
     color: 'red',
@@ -69,7 +81,16 @@ var Totalcircle = L.circle([obj[x].lat, obj[x].lon], {
     fillOpacity: 0.5,
     radius: obj[x].totalcases * 30
 }).addTo(myTotalmap);
-Totalcircle.bindPopup(x + ' :  '+ obj[x].totalcases);
+Totalcircle.bindPopup(x + ' : Total '+ obj[x].totalcases);
+
+
+var NewCasecircle = L.circle([obj[x].lat, obj[x].lon], {
+    color: 'red',
+    fillColor: '#f03',
+    fillOpacity: 0.5,
+    radius: obj[x].newcases * 200
+}).addTo(myNewCasemap);
+NewCasecircle.bindPopup(x + ' : New '+ obj[x].newcases);
 
 
 
@@ -92,10 +113,7 @@ Totalcircle.bindPopup(x + ' :  '+ obj[x].totalcases);
     <a href="/" class="w3-bar-item w3-button w3-theme-l1">Der Vorgarten</a>
     <a href="/" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Charts and Tables</a>
     <a href="#" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Maps</a>
-    <a href="#" class="w3-bar-item w3-button w3-hide-small w3-hover-white">News</a>
-    <a href="#" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Others</a>
-    <a href="#" class="w3-bar-item w3-button w3-hide-small w3-hide-medium w3-hover-white">Clients</a>
-    <a href="#" class="w3-bar-item w3-button w3-hide-small w3-hide-medium w3-hover-white">Partners</a>
+    <a href="#" class="w3-bar-item w3-button w3-hide-small w3-hide-medium w3-hover-white">Others</a>
   </div>
 </div>
 
@@ -124,12 +142,22 @@ Totalcircle.bindPopup(x + ' :  '+ obj[x].totalcases);
  
   <div class="w3-row w3-padding-64">
     <div >
-      <h1 class="w3-text-teal">Spread portrayed on the World map</h1>
+      <h1 class="w3-text-teal">Virus Spread plotted on the World map</h1>
       <p>The map shows the current number of active NCOVID-19 cases. The circles indicate the magnitude of the cases and not the regional boundary. Click/ tap on the circles to view the country and the details. Scale of the circles are different in each map for the purpose of fair visualization.</p>
-	  <h1 class="w3-text-teal">Spread analysis - All Cases Map</h1>
-	  <div id="totalcasesmapid" style="width: 400px; height: 400px;"></div>
+	  <h1 class="w3-text-teal">Faster Spread - New Cases Map</h1>
+	  <p>The map shows the recent confirmed cases. The virus spreads faster around these larger circles. You have to be really careful if you live around the larger circles. Scale used - 200.</p>
+	  <div id="newcasemapid" style="width: 400px; height: 400px;"></div>
+	  
 	  <h1 class="w3-text-teal">Spread analysis - Active Cases Map</h1>
+	  <p>The map shows the active cases. Larger circles indicate more active cases. Be careful if you move around the larger circles. Scale used - 60.</p>
 	  <div id="mapid" style="width: 400px; height: 400px;"></div>
+	  
+	  
+	  <h1 class="w3-text-teal">Spread analysis - All Cases Map</h1>
+	  <p>The map shows total confirmed cases including the closed ones. This is meant for information on the damage suffered by each country. Scale used - 30.</p>
+	  <div id="totalcasesmapid" style="width: 400px; height: 400px;"></div>
+	  
+	
 	  
     </div>
     
@@ -143,11 +171,11 @@ Totalcircle.bindPopup(x + ' :  '+ obj[x].totalcases);
 
   <footer id="myFooter">
     <div class="w3-container w3-theme-l2 w3-padding-12">
-      <h4>Built with html, js, plotly, python and so on..</h4>
+      <h12>Built with js, plotly, leaflet-openstreetmap-mapbox, python with multiple modules and so on..</h12>
     </div>
 
     <div class="w3-container w3-theme-l1">
-      <p>Proudly Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>
+      <p>CSS Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>
     </div>
   </footer>
 
@@ -166,11 +194,13 @@ function w3_open() {
   if (mySidebar.style.display === 'block') {
 	document.getElementById("mapid").style.display = "block";
 	document.getElementById("totalcasesmapid").style.display = "block";
+	document.getElementById("newcasemapid").style.display = "block";
     mySidebar.style.display = 'none';
     overlayBg.style.display = "none";
   } else {
 	document.getElementById("mapid").style.display = "none";
 	document.getElementById("totalcasesmapid").style.display = "none";
+	document.getElementById("newcasemapid").style.display = "none";
     mySidebar.style.display = 'block';
     overlayBg.style.display = "block";
   }
@@ -180,6 +210,7 @@ function w3_open() {
 function w3_close() {
   document.getElementById("mapid").style.display = "block";
   document.getElementById("totalcasesmapid").style.display = "block";
+  document.getElementById("newcasemapid").style.display = "block";
   mySidebar.style.display = "none";
   overlayBg.style.display = "none";
 }
