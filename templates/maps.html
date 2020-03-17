@@ -33,6 +33,17 @@ var mymap = L.map('mapid').setView([51.505, -0.09], 2);
 		tileSize: 512,
 		zoomOffset: -1
 	}).addTo(mymap);
+	
+var myTotalmap = L.map('totalcasesmapid').setView([51.505, -0.09], 2);
+	L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
+		maxZoom: 18,
+		attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
+			'<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+			'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+		id: 'mapbox/streets-v11',
+		tileSize: 512,
+		zoomOffset: -1
+	}).addTo(myTotalmap);
 
 
   var xhttp = new XMLHttpRequest();
@@ -51,6 +62,15 @@ var circle = L.circle([obj[x].lat, obj[x].lon], {
     radius: obj[x].activecases * 100
 }).addTo(mymap);
 circle.bindPopup(x + ' :  '+ obj[x].activecases);
+
+var Totalcircle = L.circle([obj[x].lat, obj[x].lon], {
+    color: 'red',
+    fillColor: '#f03',
+    fillOpacity: 0.5,
+    radius: obj[x].totalcases * 30
+}).addTo(myTotalmap);
+Totalcircle.bindPopup(x + ' :  '+ obj[x].totalcases);
+
 
 
 
@@ -104,9 +124,13 @@ circle.bindPopup(x + ' :  '+ obj[x].activecases);
  
   <div class="w3-row w3-padding-64">
     <div >
-      <h1 class="w3-text-teal">NCOVID-19 Spread analysis - Maps</h1>
-      <p>The map shows the current number of active NCOVID-19 cases. The circles indicate the magnitude of the cases and not the regional boundary. Click/ tap on the circles to view the country and the details.</p>
+      <h1 class="w3-text-teal">Spread portrayed on the World map</h1>
+      <p>The map shows the current number of active NCOVID-19 cases. The circles indicate the magnitude of the cases and not the regional boundary. Click/ tap on the circles to view the country and the details. Scale of the circles are different in each map for the purpose of fair visualization.</p>
+	  <h1 class="w3-text-teal">Spread analysis - All Cases Map</h1>
+	  <div id="totalcasesmapid" style="width: 400px; height: 400px;"></div>
+	  <h1 class="w3-text-teal">Spread analysis - Active Cases Map</h1>
 	  <div id="mapid" style="width: 400px; height: 400px;"></div>
+	  
     </div>
     
   </div>
@@ -141,10 +165,12 @@ var overlayBg = document.getElementById("myOverlay");
 function w3_open() {
   if (mySidebar.style.display === 'block') {
 	document.getElementById("mapid").style.display = "block";
+	document.getElementById("totalcasesmapid").style.display = "block";
     mySidebar.style.display = 'none';
     overlayBg.style.display = "none";
   } else {
 	document.getElementById("mapid").style.display = "none";
+	document.getElementById("totalcasesmapid").style.display = "none";
     mySidebar.style.display = 'block';
     overlayBg.style.display = "block";
   }
@@ -153,6 +179,7 @@ function w3_open() {
 // Close the sidebar with the close button
 function w3_close() {
   document.getElementById("mapid").style.display = "block";
+  document.getElementById("totalcasesmapid").style.display = "block";
   mySidebar.style.display = "none";
   overlayBg.style.display = "none";
 }
