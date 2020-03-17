@@ -83,14 +83,14 @@ var Totalcircle = L.circle([obj[x].lat, obj[x].lon], {
 }).addTo(myTotalmap);
 Totalcircle.bindPopup(x + ' : Total '+ obj[x].totalcases);
 
-
+if (obj[x].newcases != 0){
 var NewCasecircle = L.circle([obj[x].lat, obj[x].lon], {
     color: 'red',
     fillColor: '#f03',
     fillOpacity: 0.5,
     radius: obj[x].newcases * 200
 }).addTo(myNewCasemap);
-NewCasecircle.bindPopup(x + ' : New '+ obj[x].newcases);
+NewCasecircle.bindPopup(x + ' : New '+ obj[x].newcases);}
 
 
 
