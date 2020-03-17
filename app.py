@@ -128,9 +128,9 @@ def getmapdata():
     # this is to supply the info for plotting data on the map
     global mydataframe
     global mapdatajson
-    returndata='{'
+    returndata = '{'
     try:
-        for x in mydataframe['Country Or Location']:
+        for country in mydataframe['Country Or Location']:
 
             latlondata = {"Andorra": {"lat": "42.546245", "lon": "1.6015540000000001"},
                       "UAE": {"lat": "23.424076", "lon": "53.847818000000004"},
@@ -383,12 +383,18 @@ def getmapdata():
 					  "Curaçao": {"lat": "12.138120", "lon": "-68.927072"},
                       "Zimbabwe": {"lat": "-19.015438", "lon": "29.154857"}}
 
-            #below for loop drama is to read the cell value from df
-            for activecase in mydataframe[mydataframe["Country Or Location"] == x]["Active Cases"]:
+            #below for loop drama is to read the cell value from df- for the current countrys activecases. this will always return only one row
+            for activecase in mydataframe[mydataframe["Country Or Location"] == country]["Active Cases"]:
+                print(activecase)
                 currentActiveCase = str(activecase)
+            # below for loop drama is to read the cell value from df- for the current countrys activecases. this will always return only one row
+            for totalcase in mydataframe[mydataframe["Country Or Location"] == country]["Total Cases"]:
+                print(totalcase)
+                currentTotalCase = str(totalcase)
 
-            if (x in latlondata):
-                returndata = returndata + '"' + x + '":{"lat":"' + latlondata[x]['lat'] + '","lon":"' + latlondata[x]['lon'] + '","activecases":"' + currentActiveCase + '"},'
+            # prepare the map data only if the current country has lat-lon info is available
+            if (country in latlondata):
+                returndata = returndata + '"' + country + '":{"lat":"' + latlondata[country]['lat'] + '","lon":"' + latlondata[country]['lon'] + '","activecases":"' + currentActiveCase + '","totalcases":"' + currentTotalCase +'"},'
             else:
                 pass
         #to remove the last comma
