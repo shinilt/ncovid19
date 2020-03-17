@@ -52,6 +52,8 @@ def GenerateResources():
     df2.columns = ['Country Or Location', 'Total Cases', 'New Cases', 'Total Deaths', 'Total Recovered', 'Active Cases']
     # columns to convert to int for visual appearance
     cols = ['Total Cases', 'Total Deaths', 'Total Recovered']
+    df2['New Cases'] = df2['New Cases'].str.replace(',', '')
+    df2['New Cases'] = df2['New Cases'].str.replace('+', '')
     df2 = df2.fillna(0)
     df2[cols] = df2[cols].fillna(0).applymap(np.int64)
     """
@@ -90,6 +92,7 @@ def GenerateResources():
     #create json from dataframe for the use in web javascript
     dfJson = df2.to_json()
     global mydataframe
+    #save the dataframe as varable for use from anywhere
     mydataframe=df2
     return dfJson
 
@@ -131,7 +134,7 @@ def getmapdata():
     returndata = '{'
     try:
         for country in mydataframe['Country Or Location']:
-
+            #the latlondata is the location data for all the countries
             latlondata = {"Andorra": {"lat": "42.546245", "lon": "1.6015540000000001"},
                       "UAE": {"lat": "23.424076", "lon": "53.847818000000004"},
                       "Afghanistan": {"lat": "33.93911", "lon": "67.709953"},
@@ -385,16 +388,21 @@ def getmapdata():
 
             #below for loop drama is to read the cell value from df- for the current countrys activecases. this will always return only one row
             for activecase in mydataframe[mydataframe["Country Or Location"] == country]["Active Cases"]:
-                print(activecase)
+
                 currentActiveCase = str(activecase)
-            # below for loop drama is to read the cell value from df- for the current countrys activecases. this will always return only one row
+            # below for loop drama is to read the cell value from df- for the current countrys total cases. this will always return only one row
             for totalcase in mydataframe[mydataframe["Country Or Location"] == country]["Total Cases"]:
-                print(totalcase)
+
                 currentTotalCase = str(totalcase)
+
+            # below for loop drama is to read the cell value from df- for the current countrys total cases. this will always return only one row
+            for Newcase in mydataframe[mydataframe["Country Or Location"] == country]["New Cases"]:
+                currentNewCase = str(Newcase)
+                #currentNewCase = ((str(Newcase)[1:]).replace('+', '')).replace(',', '')
 
             # prepare the map data only if the current country has lat-lon info is available
             if (country in latlondata):
-                returndata = returndata + '"' + country + '":{"lat":"' + latlondata[country]['lat'] + '","lon":"' + latlondata[country]['lon'] + '","activecases":"' + currentActiveCase + '","totalcases":"' + currentTotalCase +'"},'
+                returndata = returndata + '"' + country + '":{"lat":"' + latlondata[country]['lat'] + '","lon":"' + latlondata[country]['lon'] + '","activecases":"' + currentActiveCase + '","totalcases":"' + currentTotalCase + '","newcases":"' + currentNewCase +'"},'
             else:
                 pass
         #to remove the last comma
