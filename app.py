@@ -53,7 +53,7 @@ def GenerateResources():
     df2.columns = ['Country Or Location', 'Total Cases', 'New Cases', 'Total Deaths', 'Total Recovered', 'Active Cases']
     # columns to convert to int for visual appearance
     cols = ['Total Cases', 'Total Deaths', 'Total Recovered']
-    df2['New Cases'] = df2['New Cases'].apply(lambda x: (str(int(x)).replace(',', '').replace('+', '')))
+    df2['New Cases'] = df2['New Cases'].apply(lambda x: int((str(x).replace(',', '').replace('+', ''))))
     df2[cols] = df2[cols].fillna(0).applymap(np.int64)
     """
     #commenting the entire section as the plot and table generation moved to javascript
