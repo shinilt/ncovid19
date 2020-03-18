@@ -48,13 +48,12 @@ def GenerateResources():
 
     #copy only required columns
     df2 = df[0].iloc[:, [0, 1, 2, 3, 5, 6]]
+    df2 = df2.fillna(0)
     #rename the columns
     df2.columns = ['Country Or Location', 'Total Cases', 'New Cases', 'Total Deaths', 'Total Recovered', 'Active Cases']
     # columns to convert to int for visual appearance
     cols = ['Total Cases', 'Total Deaths', 'Total Recovered']
-    df2['New Cases'] = df2['New Cases'].str.replace(',', '')
-    df2['New Cases'] = df2['New Cases'].str.replace('+', '')
-    df2 = df2.fillna(0)
+    df2['New Cases'] = df2['New Cases'].apply(lambda x: (str(int(x)).replace(',', '').replace('+', '')))
     df2[cols] = df2[cols].fillna(0).applymap(np.int64)
     """
     #commenting the entire section as the plot and table generation moved to javascript
