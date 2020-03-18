@@ -88,7 +88,7 @@ var NewCasecircle = L.circle([obj[x].lat, obj[x].lon], {
     color: 'red',
     fillColor: '#f03',
     fillOpacity: 0.5,
-    radius: obj[x].newcases * 200
+    radius: obj[x].newcases * 500
 }).addTo(myNewCasemap);
 NewCasecircle.bindPopup(x + ' : New '+ obj[x].newcases);}
 
@@ -145,7 +145,7 @@ NewCasecircle.bindPopup(x + ' : New '+ obj[x].newcases);}
       <h1 class="w3-text-teal">Virus Spread plotted on the World map</h1>
       <p>The map shows the current number of active NCOVID-19 cases. The circles indicate the magnitude of the cases and not the regional boundary. Click/ tap on the circles to view the country and the details. Scale of the circles are different in each map for the purpose of fair visualization.</p>
 	  <h1 class="w3-text-teal">1. Faster Spread - New Cases Map</h1>
-	  <p>The map shows the recent confirmed cases. The virus spreads faster around these larger circles. You have to be really careful if you live around the larger circles. Scale used - 200.</p>
+	  <p>The map shows the recent confirmed cases. The virus spreads faster around these larger circles. You have to be really careful if you live around the larger circles. Scale used - 500.</p>
 	  <div id="newcasemapid" style="width: 400px; height: 400px;"></div>
 	  
 	  <h1 class="w3-text-teal">2. Spread analysis - Active Cases Map</h1>
