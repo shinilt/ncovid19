@@ -433,6 +433,10 @@ def trenddata():
     newjson = new.to_json()
     return newjson
 
+@app.route("/charts", methods=['GET'])
+def charts():
+
+    return render_template("charts.html")
 
 if __name__ == "__main__":
     # create new thread for auto refresh of the dataframe
