@@ -53,7 +53,7 @@ def GenerateResources():
     df2.columns = ['Country Or Location', 'Total Cases', 'New Cases', 'Total Deaths', 'Total Recovered', 'Active Cases']
     # columns to convert to int for visual appearance
     cols = ['Total Cases', 'Total Deaths', 'Total Recovered']
-    df2['New Cases'] = df2['New Cases'].apply(lambda x: int((str(x).replace(',', '').replace('+', ''))))
+    df2['New Cases'] = df2['New Cases'].apply(lambda x: int(str(x).replace(',', '').replace('+', '')))
     df2[cols] = df2[cols].fillna(0).applymap(np.int64)
     """
     #commenting the entire section as the plot and table generation moved to javascript
@@ -107,7 +107,7 @@ def Index():
 def getdata():
     # this method will fetch the current value of the complete dataframe json and return
     global dataframejson
-    if len(dataframejson) > 1:
+    if (len(dataframejson) > 1):
         return Response(dataframejson, 200)
     else:
         dataframejson = GenerateResources()
@@ -411,12 +411,27 @@ def getmapdata():
         return mapdatajson
     except:
 
-        return mapdatajson
+        return "Unable to retrieve data , please refresh"
 
-@app.route("/bounties", methods=['GET'])
-def bounties():
+@app.route("/trend", methods=['GET'])
+def trend():
+
+    return render_template("trend.html")
+@app.route("/trenddata", methods=['GET'])
+def trenddata():
     # this is to render the map page with details
-    return render_template("bounties.html")
+
+    url_totalcases = 'https://covid.ourworldindata.org/data/ecdc/total_cases.csv'
+    df = pd.read_csv(url_totalcases)
+    df.fillna('0', inplace=True)
+    OriginalCols = list(df.columns.values)
+
+    colsUpper = [x.upper() for x in OriginalCols]
+    df.columns = colsUpper
+    country = 'INDIA'
+    new = df[['DATE', 'WORLD', country]].copy()
+    newjson = new.to_json()
+    return newjson
 
 
 if __name__ == "__main__":
