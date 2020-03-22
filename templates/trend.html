@@ -113,6 +113,8 @@ var countrychart = new Chart(countryctx, {
 
 </script>
 <body onload="getData()">
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v6.0"></script>
 
 <!-- Navbar -->
 <div class="w3-top">
@@ -157,22 +159,28 @@ var countrychart = new Chart(countryctx, {
   
   </div>
   
+
+  
+  
   <a href="/maps"><h3 class="w3-text-teal" ><b>Click here for the Maps</b></h3></a>
   
   <h1 class="w3-text-teal">Overall Trend</h1>
   <p id="Intro">You can view the global spread trend below. It will diplay the cases confirmed day by day until now.</p>
   <canvas id="myWorldChart"></canvas>
   
+  
+  <div class="fb-like" data-href="https://ncovid19.herokuapp.com/" data-width="" data-layout="standard" data-action="like" data-size="small" data-share="true"></div>
+  
+  
   <h1 class="w3-text-teal">Growth Trend in India</h1>
   <p id="Intro">You can view the spread trend below in India. It is all cases confirmed until now.</p>
   <canvas id="myCountryChart"></canvas>
   
+  <div class="fb-like" data-href="https://ncovid19.herokuapp.com/" data-width="" data-layout="standard" data-action="like" data-size="small" data-share="true"></div>
   
-
-    
-
-
  
+  <a class="twitter-share-button"  href="https://twitter.com/intent/tweet?text=https://ncovid19.herokuapp.com/">Tweet</a>
+   
 
 
 

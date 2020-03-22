@@ -105,6 +105,8 @@ NewCasecircle.bindPopup(x + ' : New '+ obj[x].newcases);}
 	}
 </script>
 <body onload="getMapData()">
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v6.0"></script>
 
 <!-- Navbar -->
 <div class="w3-top">
@@ -150,15 +152,21 @@ NewCasecircle.bindPopup(x + ' : New '+ obj[x].newcases);}
 	  <p>The map shows the recent confirmed cases. The virus spreads faster around these larger circles. You have to be really careful if you live around the larger circles. Scale used - 500.</p>
 	  <div id="newcasemapid" style="width: 400px; height: 400px;"></div>
 	  
+	  <div class="fb-like" data-href="https://ncovid19.herokuapp.com/" data-width="" data-layout="standard" data-action="like" data-size="small" data-share="true"></div>
+	  
+	  
 	  <h1 class="w3-text-teal">2. Spread analysis - Active Cases Map</h1>
 	  <p>The map shows the active cases. Larger circles indicate more active cases. Be careful if you move around the larger circles. Scale used - 60.</p>
 	  <div id="mapid" style="width: 400px; height: 400px;"></div>
+	  
+	  <div class="fb-like" data-href="https://ncovid19.herokuapp.com/" data-width="" data-layout="standard" data-action="like" data-size="small" data-share="true"></div>
 	  
 	  
 	  <h1 class="w3-text-teal">3. Spread analysis - All Cases Map</h1>
 	  <p>The map shows total confirmed cases including the closed ones. This is meant for information on the damage suffered by each country. Scale used - 30.</p>
 	  <div id="totalcasesmapid" style="width: 400px; height: 400px;"></div>
 	  
+	  <div class="fb-like" data-href="https://ncovid19.herokuapp.com/" data-width="" data-layout="standard" data-action="like" data-size="small" data-share="true"></div>
 	
 	  
     </div>
