@@ -35,32 +35,47 @@ TotalCases=[];
 ActiveCases=[];
 NewCases=[];
 TotalDeaths=[];
-RecoveredCase=[];
-txt = "<table border='1'><tr><th>Country Or Location</th><th>Total Cases</th><th>Total Deaths</th><th>Total Recovered</th><th>Active Cases</th></tr>"
-      for (x in obj['Country Or Location']) {
+     for (x in obj['Country Or Location']) {
       Country.push(obj['Country Or Location'][x]);
       TotalCases.push(obj['Total Cases'][x]);
       ActiveCases.push(obj['Active Cases'][x]);
       NewCases.push(obj['New Cases'][x]);
       TotalDeaths.push(obj['Total Deaths'][x]);
-	  RecoveredCase.push(obj['Total Recovered'][x]);
-      txt += "<tr><td>" + obj['Country Or Location'][x] + "</td><td>"+ obj['Total Cases'][x]  +  "</td><td>"+ obj['Total Deaths'][x] + "</td><td>"+ obj['Total Recovered'][x] + "</td><td>"+ obj['Active Cases'][x]+"</td></tr>";
+      
       }
-      txt += "</table>" ;   
-      document.getElementById("AffectedCountryTable").innerHTML = txt;
-	  
-      var TotalCaseSum=TotalCases[TotalCases.length - 1];
-	  var ActiveCaseSum=ActiveCases[ActiveCases.length - 1];
-	  var DeathsSum=TotalDeaths[TotalDeaths.length - 1];
-	  var NewCaseSum=NewCases[NewCases.length - 1];
-	  var RecoveredSum=RecoveredCase[RecoveredCase.length - 1];
-	  
-	  
-	  document.getElementById("summaryTotal").innerHTML = "<span style='color:red'>"+TotalCaseSum+" </span> Total cases so far.";
-	  document.getElementById("summaryRecovered").innerHTML = "<span style='color:ForestGreen'>"+RecoveredSum+" </span> People have recovered completely.";
-	  document.getElementById("summaryDied").innerHTML = "Sadly , <span style='color:DarkRed'>"+DeathsSum+" </span>people died.";
-	  document.getElementById("summaryNew").innerHTML = "<span style='color:Chocolate'>"+NewCaseSum+" </span>new cases reported today.";
-	  document.getElementById("summaryActive").innerHTML = "<span style='color:CornFlowerBlue'>"+ActiveCaseSum+" </span>people are under treatment and recovering.";
+      
+      
+	  Country.pop();
+      TotalCases.pop();
+      ActiveCases.pop();
+      NewCases.pop();
+      TotalDeaths.pop();
+      
+      var plotlayout = { responsive: true,font: {size: 10}};
+	  var config = {responsive: false};
+      
+      var barchartdataAll = [  { x: Country,    y: TotalCases,    type: 'bar'  }];
+      var barchartdataActive = [  { x: Country,    y: ActiveCases,    type: 'bar'  }];
+      var barchartdataNewCase = [  { x: Country,    y: NewCases,    type: 'bar'  }];
+      var barchartdataTotalDeaths = [  { x: Country,    y: TotalDeaths,    type: 'bar'  }];
+      
+      var piechartdataAll = [  { values:TotalCases ,    labels: Country ,    type: 'pie'  }];
+      var piechartdataActive = [  { values:ActiveCases ,    labels: Country ,    type: 'pie'  }];
+      var piechartdataNewCase = [  { values:NewCases ,    labels: Country ,    type: 'pie'  }];
+      var piechartdataTotalDeaths = [  { values:TotalDeaths ,    labels: Country ,    type: 'pie'  }];
+      
+
+Plotly.newPlot('BarChartAllDiv', barchartdataAll, plotlayout, config);
+Plotly.newPlot('PieChartAllDiv', piechartdataAll, plotlayout, config);
+
+Plotly.newPlot('BarChartActiveDiv', barchartdataActive, plotlayout, config);
+Plotly.newPlot('PieChartActiveDiv', piechartdataActive, plotlayout, config);
+
+Plotly.newPlot('BarChartNewCaseDiv', barchartdataNewCase, plotlayout, config);
+Plotly.newPlot('PieChartNewCaseDiv', piechartdataNewCase, plotlayout, config);
+
+Plotly.newPlot('BarChartTotalDeathsDiv', barchartdataTotalDeaths, plotlayout, config);
+Plotly.newPlot('PieChartTotalDeathsDiv', piechartdataTotalDeaths, plotlayout, config);
 
     }
 	
@@ -79,8 +94,8 @@ txt = "<table border='1'><tr><th>Country Or Location</th><th>Total Cases</th><th
 <div class="w3-top">
   <div class="w3-bar w3-theme w3-top w3-left-align w3-large">
     <a class="w3-bar-item w3-button w3-right w3-hide-large w3-hover-white w3-large w3-theme-l1" href="javascript:void(0)" onclick="w3_open()"><i class="fa fa-bars"></i></a>
-    <a href="#" class="w3-bar-item w3-button w3-theme-l1">Der Vorgarten</a>
-    <a href="/charts" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Charts and Tables</a>
+    <a href="/" class="w3-bar-item w3-button w3-theme-l1">Der Vorgarten</a>
+    <a href="#" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Charts and Tables</a>
     <a href="/maps" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Maps</a>
 	<a href="/trend" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Trend</a>
     <a href="#" class="w3-bar-item w3-button w3-hide-small w3-hide-medium w3-hover-white">Others</a>
@@ -93,8 +108,8 @@ txt = "<table border='1'><tr><th>Country Or Location</th><th>Total Cases</th><th
     <i class="fa fa-remove"></i>
   </a>
   <h4 class="w3-bar-item"><b>Menu</b></h4>
-  <a class="w3-bar-item w3-button w3-hover-black" href="#">Home</a>
-  <a class="w3-bar-item w3-button w3-hover-black" href="/charts">Charts and Tables</a>
+  <a class="w3-bar-item w3-button w3-hover-black" href="/">Home</a>
+  <a class="w3-bar-item w3-button w3-hover-black" href="#">Charts and Tables</a>
   <a class="w3-bar-item w3-button w3-hover-black" href="/maps">Maps</a>
   <a class="w3-bar-item w3-button w3-hover-black" href="/trend">Trend</a>
 </nav>
@@ -113,39 +128,59 @@ txt = "<table border='1'><tr><th>Country Or Location</th><th>Total Cases</th><th
   <div class="w3-row">
     <div >
       <h1 class="w3-text-teal">NCOVID-19 Statistics</h1>
-      <p id="Intro">This application makes an attempt to provide you some information about the Corona virus outbreak 2019. It relies on the data from different sources and provide you some insights on the event. The data is not generated in-house, but extracted from several reliable external sources.</p>
+      <p id="Intro">This application makes an attempt to provide you some information about the Corona virus outbreak 2019. It relies on the data from different sources and provide you some insights on the event.</p>
     </div>
   
   </div>
   
+  <a href="/maps"><h3 class="w3-text-teal" ><b>Click here for the Maps</b></h3></a>
   
-  <h4><span style='color:MediumPurple'><b>Quick Look</b></span></h4>
-  <div id="summaryTotal"><p> </p>  </div> 
-  <div id="summaryRecovered"><p> </p></div>
-  <div id="summaryDied"> </div>
-  <div id="summaryNew"> </div>
-  <div id="summaryActive"> </div>
+  <div class="w3-row w3-padding-50">
+    <div >
+      <h1 class="w3-text-teal">Cumulative cases</h1>
+      <div id='BarChartAllDiv'>
+	  <div id='PieChartAllDiv'>
+	  
+    </div>
+    
+  </div>
   
+  <div class="fb-like" data-href="https://ncovid19.herokuapp.com/" data-width="" data-layout="button_count" data-action="like" data-size="small" data-share="true"></div>
   
-  <a href="/maps"><h3 ><span style='color:LightCoral'><b>Click here for the Maps</b></span></h3></a>
-  
-
-  
-
-  
-
- 
-
-
   <div class="w3-row">
     <div >
-      <h2 class="w3-text-teal">Complete list of affected regions</h2>
-      <p id="AffectedCountryTable">Fetching the latest data...If it is taking too long, please refresh the page after some time</p>
+      <h1 class="w3-text-teal">Active cases</h1>
+      <div id='BarChartActiveDiv'>
+	  <div id='PieChartActiveDiv'>
     </div>
   
   </div>
+  
+    <div class="fb-like" data-href="https://ncovid19.herokuapp.com/" data-width="" data-layout="button_count" data-action="like" data-size="small" data-share="true"></div>
+	
+  <div class="w3-row">
+    <div >
+      <h1 class="w3-text-teal">New cases</h1>
+      <div id='BarChartNewCaseDiv'>
+	  <div id='PieChartNewCaseDiv'>
+    </div>
+  
+  </div>
+  
+   <div class="fb-like" data-href="https://ncovid19.herokuapp.com/" data-width="" data-layout="button_count" data-action="like" data-size="small" data-share="true"></div>
+	
+  <div class="w3-row">
+    <div >
+      <h1 class="w3-text-teal">Total Deaths</h1>
+      <div id='BarChartTotalDeathsDiv'>
+	  <div id='PieChartTotalDeathsDiv'>
+    </div>
+  
+  </div>
+  
+    <div class="fb-like" data-href="https://ncovid19.herokuapp.com/" data-width="" data-layout="button_count" data-action="like" data-size="small" data-share="true"></div>
+	
 
- <div class="fb-like" data-href="https://ncovid19.herokuapp.com/" data-width="" data-layout="standard" data-action="like" data-size="small" data-share="true"></div>
 
 <br>
 
