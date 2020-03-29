@@ -50,16 +50,7 @@ var myTotalmap = L.map('totalcasesmapid').setView([32.427908, 53.68804599999999]
 	}).addTo(myTotalmap);
 	
 	
-var myNewCasemap = L.map('newcasemapid').setView([32.427908, 53.68804599999999], 2);
-	L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
-		maxZoom: 18,
-		attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
-			'<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
-			'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-		id: 'mapbox/streets-v11',
-		tileSize: 512,
-		zoomOffset: -1
-	}).addTo(myNewCasemap);
+
 
 
   var xhttp = new XMLHttpRequest();
@@ -74,27 +65,19 @@ var myNewCasemap = L.map('newcasemapid').setView([32.427908, 53.68804599999999],
 var circle = L.circle([obj[x].lat, obj[x].lon], {
     color: 'red',
     fillColor: '#f03',
-    fillOpacity: 0.5,
-    radius: obj[x].activecases * 60
+    fillOpacity: 0.3,
+    radius: 150000
 }).addTo(mymap);
-circle.bindPopup(x + ' : Active '+ obj[x].activecases);
+circle.bindPopup(x +  ': New '+ obj[x].newcases + ', Active '+ obj[x].activecases + ', Total '+ obj[x].totalcases );
 
 var Totalcircle = L.circle([obj[x].lat, obj[x].lon], {
     color: 'red',
     fillColor: '#f03',
-    fillOpacity: 0.5,
-    radius: obj[x].totalcases * 30
+    fillOpacity: 0.2,
+    radius: 150000 + (obj[x].totalcases * 10)
 }).addTo(myTotalmap);
 Totalcircle.bindPopup(x + ' : Total '+ obj[x].totalcases);
 
-if (obj[x].newcases != 0){
-var NewCasecircle = L.circle([obj[x].lat, obj[x].lon], {
-    color: 'red',
-    fillColor: '#f03',
-    fillOpacity: 0.5,
-    radius: obj[x].newcases * 500
-}).addTo(myNewCasemap);
-NewCasecircle.bindPopup(x + ' : New '+ obj[x].newcases);}
 
 
 
@@ -152,22 +135,16 @@ NewCasecircle.bindPopup(x + ' : New '+ obj[x].newcases);}
   <div class="w3-row w3-padding-50">
     <div >
       <h1 class="w3-text-teal">Virus Spread plotted on the World map</h1>
-      <p>The map shows the current number of active NCOVID-19 cases. The circles indicate the magnitude of the cases and not the regional boundary. Click/ tap on the circles to view the country and the details. Scale of the circles are different in each map for the purpose of fair visualization.</p>
-	  <h1 class="w3-text-teal">1. Faster Spread - New Cases Map</h1>
-	  <p>The map shows the recent confirmed cases. The virus spreads faster around these larger circles. You have to be really careful if you live around the larger circles. Scale used - 500.</p>
-	  <div id="newcasemapid" style="width: 400px; height: 400px;"></div>
-	  
-	  <div class="fb-like" data-href="https://ncovid19.herokuapp.com/" data-width="" data-layout="button_count" data-action="like" data-size="small" data-share="true"></div>
-	  
-	  
-	  <h1 class="w3-text-teal">2. Spread analysis - Active Cases Map</h1>
-	  <p>The map shows the active cases. Larger circles indicate more active cases. Be careful if you move around the larger circles. Scale used - 60.</p>
+      <p>The map shows the number of COVID-19 cases. The circles does not indicate the regional boundary. Click/ tap on the circles to view the country and the details. Scale of the circles are different for the purpose of fair visualization.</p>
+	 	  
+	  <h1 class="w3-text-teal">1. Spread analysis - New and Active Cases Map</h1>
+	  <p>The map shows the active and new cases. Larger circles indicate more active cases. </p>
 	  <div id="mapid" style="width: 400px; height: 400px;"></div>
 	  
 	  <div class="fb-like" data-href="https://ncovid19.herokuapp.com/" data-width="" data-layout="button_count" data-action="like" data-size="small" data-share="true"></div>
 	  
 	  
-	  <h1 class="w3-text-teal">3. Spread analysis - All Cases Map</h1>
+	  <h1 class="w3-text-teal">2. Spread analysis - All Cases Map</h1>
 	  <p>The map shows total confirmed cases including the closed ones. This is meant for information on the damage suffered by each country. Scale used - 30.</p>
 	  <div id="totalcasesmapid" style="width: 400px; height: 400px;"></div>
 	  
@@ -186,7 +163,7 @@ NewCasecircle.bindPopup(x + ' : New '+ obj[x].newcases);}
 
   <footer id="myFooter">
     <div class="w3-container w3-theme-l2 w3-padding-12">
-      <h12>Built with js, plotly, leaflet-openstreetmap-mapbox, python with multiple modules and so on..</h12>
+      <h12>Built with python.</h12>
     </div>
 
     <div class="w3-container w3-theme-l1">
@@ -209,13 +186,13 @@ function w3_open() {
   if (mySidebar.style.display === 'block') {
 	document.getElementById("mapid").style.display = "block";
 	document.getElementById("totalcasesmapid").style.display = "block";
-	document.getElementById("newcasemapid").style.display = "block";
+	
     mySidebar.style.display = 'none';
     overlayBg.style.display = "none";
   } else {
 	document.getElementById("mapid").style.display = "none";
 	document.getElementById("totalcasesmapid").style.display = "none";
-	document.getElementById("newcasemapid").style.display = "none";
+	
     mySidebar.style.display = 'block';
     overlayBg.style.display = "block";
   }
@@ -225,7 +202,7 @@ function w3_open() {
 function w3_close() {
   document.getElementById("mapid").style.display = "block";
   document.getElementById("totalcasesmapid").style.display = "block";
-  document.getElementById("newcasemapid").style.display = "block";
+  
   mySidebar.style.display = "none";
   overlayBg.style.display = "none";
 }
