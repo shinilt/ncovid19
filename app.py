@@ -53,8 +53,11 @@ def GenerateResources():
     review_soup = BeautifulSoup(req_data.content, 'html.parser')
 
     #copy only required columns
-    df2 = df[0].iloc[:, [0, 1, 2, 3, 5, 6]]
+    #df2 = df[0].iloc[:, [0, 1, 2, 3, 5, 6]] #this is also a working way of copying slected columns based on the index
+    df2 = df[0].filter(['Country,Other', 'TotalCases', 'NewCases', 'TotalDeaths', 'TotalRecovered', 'ActiveCases'], axis=1)
     df2 = df2.fillna(0)
+    # delete the row for world
+    df2.drop(df2.loc[df2['Country,Other'] == 'World'].index, inplace=True)
     #rename the columns
     df2.columns = ['Country Or Location', 'Total Cases', 'New Cases', 'Total Deaths', 'Total Recovered', 'Active Cases']
     # columns to convert to int for visual appearance
